@@ -1,4 +1,4 @@
-﻿using Project.Core.Storage.File.Features;
+﻿//using Project.Core.Storage.File.Features;
 using MediatR;
 
 namespace Project.Core.Identity.Users.Features.UpdateUser;
@@ -9,6 +9,6 @@ public class UpdateUserCommand : IRequest
     public string? LastName { get; set; }
     public string? PhoneNumber { get; set; }
     public string? Email { get; set; }
-    public FileUploadCommand? Image { get; set; }
+    //public FileUploadCommand? Image { get; set; }
     public bool DeleteCurrentImage { get; set; }
 }

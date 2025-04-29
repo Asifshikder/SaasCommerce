@@ -8,7 +8,6 @@ public class TenantDbContext : EFCoreStoreDbContext< ApplicationTenantInfo>
     public TenantDbContext(DbContextOptions<TenantDbContext> options)
         : base(options)
     {
-        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

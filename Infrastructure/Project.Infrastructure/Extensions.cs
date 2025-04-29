@@ -20,7 +20,6 @@ using Project.Infrastructure.OpenApi;
 using Project.Infrastructure.Persistence;
 using Project.Infrastructure.RateLimit;
 using Project.Infrastructure.SecurityHeaders;
-using Project.Infrastructure.Storage.Files;
 using Project.Infrastructure.Tenant;
 using Project.Infrastructure.Tenant.Endpoints;
 using System.Reflection;
@@ -37,7 +36,6 @@ public static class Extensions
         builder.Services.ConfigureMultitenancy();
         builder.Services.ConfigureIdentity();
         builder.Services.AddCorsPolicy(builder.Configuration);
-        builder.Services.ConfigureFileStorage();
         builder.Services.ConfigureJwtAuth();
         builder.Services.ConfigureOpenApi();
         builder.Services.ConfigureJobs(builder.Configuration);
@@ -67,16 +65,16 @@ public static class Extensions
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         });
 
-        //builder.Services.ConfigureRateLimit(builder.Configuration);
-        //builder.Services.ConfigureSecurityHeaders(builder.Configuration);
+        builder.Services.ConfigureRateLimit(builder.Configuration);
+        builder.Services.ConfigureSecurityHeaders(builder.Configuration);
 
         return builder;
     }
 
     public static WebApplication UseInfrastructure(this WebApplication app)
     {
-        //app.UseRateLimit();
-        //app.UseSecurityHeaders();
+        app.UseRateLimit();
+        app.UseSecurityHeaders();
         app.UseMultitenancy();
         app.UseExceptionHandler();
         app.UseCorsPolicy();

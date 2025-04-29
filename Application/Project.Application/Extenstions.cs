@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Project.Application
 {
-    public static class CatalogModule
+    public static class ServiceCollectionExtensions
     {
         public class Endpoints : CarterModule
         {
@@ -38,7 +38,7 @@ namespace Project.Application
                 brandGroup.MapBrandDeleteEndpoint();
             }
         }
-        public static WebApplicationBuilder RegisterCatalogServices(this WebApplicationBuilder builder)
+        public static WebApplicationBuilder RegisterFeatureServices(this WebApplicationBuilder builder)
         {
             ArgumentNullException.ThrowIfNull(builder);
             builder.Services.AddKeyedScoped<IRepository<Product>, EntityRepository<Product>>("catalog:products");
@@ -47,7 +47,7 @@ namespace Project.Application
             builder.Services.AddKeyedScoped<IReadRepository<Brand>, EntityRepository<Brand>>("catalog:brands");
             return builder;
         }
-        public static WebApplication UseCatalogModule(this WebApplication app)
+        public static WebApplication UseApplicationModule(this WebApplication app)
         {
             return app;
         }

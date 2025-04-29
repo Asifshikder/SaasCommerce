@@ -16,7 +16,7 @@ namespace Webapi
             //define module assemblies
             var assemblies = new Assembly[]
             {
-            typeof(CatalogMetadata).Assembly
+            typeof(ApplicationMetaData).Assembly
             };
 
             //register validators
@@ -29,13 +29,13 @@ namespace Webapi
             });
 
             //register module services
-            builder.RegisterCatalogServices();
+            builder.RegisterFeatureServices();
             builder.RegisterPersistenceServices();
 
             //add carter endpoint modules
             builder.Services.AddCarter(configurator: config =>
             {
-                config.WithModule<CatalogModule.Endpoints>();
+                config.WithModule<Project.Application.ServiceCollectionExtensions.Endpoints>();
             });
 
             return builder;
@@ -46,7 +46,7 @@ namespace Webapi
             ArgumentNullException.ThrowIfNull(app);
 
             //register modules
-            app.UseCatalogModule();
+            app.UseApplicationModule();
             app.UsePersistenceModule();
 
             //register api versions

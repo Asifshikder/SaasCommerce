@@ -26,8 +26,7 @@ public static class Extensions
             .ValidateDataAnnotations()
             .PostConfigure(config =>
             {
-                Logger.Information("for documentations and guides, visit https://www.fullstackhero.net");
-                Logger.Information("to sponsor this project, visit https://opencollective.com/fullstackhero");
+              
             });
         builder.Services.AddScoped<ISaveChangesInterceptor, AuditInterceptor>();
         return builder;

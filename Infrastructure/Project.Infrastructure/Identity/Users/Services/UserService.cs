@@ -12,8 +12,6 @@ using Project.Core.Identity.Users.Features.ToggleUserStatus;
 using Project.Core.Identity.Users.Features.UpdateUser;
 using Project.Core.Jobs;
 using Project.Core.Mail;
-using Project.Core.Storage;
-using Project.Core.Storage.File;
 using Project.Infrastructure.Constants;
 using Project.Infrastructure.Identity.Persistence;
 using Project.Infrastructure.Identity.Roles;
@@ -34,8 +32,8 @@ internal sealed partial class UserService(
     ICacheService cache,
     IJobService jobService,
     IMailService mailService,
-    IMultiTenantContextAccessor< ApplicationTenantInfo> multiTenantContextAccessor,
-    IStorageService storageService
+    IMultiTenantContextAccessor< ApplicationTenantInfo> multiTenantContextAccessor
+    //IStorageService storageService
     ) : IUserService
 {
     private void EnsureValidTenant()
@@ -177,14 +175,14 @@ internal sealed partial class UserService(
         _ = user ?? throw new NotFoundException("user not found");
 
         Uri imageUri = user.ImageUrl ?? null!;
-        if (request.Image != null || request.DeleteCurrentImage)
-        {
-            user.ImageUrl = await storageService.UploadAsync<ApplicationUser>(request.Image, FileType.Image);
-            if (request.DeleteCurrentImage && imageUri != null)
-            {
-                storageService.Remove(imageUri);
-            }
-        }
+        //if (request.Image != null || request.DeleteCurrentImage)
+        //{
+        //    user.ImageUrl = await storageService.UploadAsync<ApplicationUser>(request.Image, FileType.Image);
+        //    if (request.DeleteCurrentImage && imageUri != null)
+        //    {
+        //        storageService.Remove(imageUri);
+        //    }
+        //}
 
         user.FirstName = request.FirstName;
         user.LastName = request.LastName;

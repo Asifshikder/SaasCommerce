@@ -29,10 +29,10 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
 
     private static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
     {
-        var text = new StringBuilder("LeadsQ");
+        var text = new StringBuilder("Saas Commerce");
         var info = new OpenApiInfo()
         {
-            Title = "LeadsQ api interface",
+            Title = "Saas Commerce api interface",
             Version = description.ApiVersion.ToString(),
             Contact = new OpenApiContact() { Name = "Asif Rabbani", Email = "asif.rabbani.ars@gmail.com" }
         };
